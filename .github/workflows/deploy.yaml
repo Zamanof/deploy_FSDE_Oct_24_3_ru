@@ -22,3 +22,7 @@ jobs:
       - name: API Dependency Install
         working-directory: ./api
         run: npm install
+
+      - name: API unit test
+        working-directory: ./api
+        run: npm run test
