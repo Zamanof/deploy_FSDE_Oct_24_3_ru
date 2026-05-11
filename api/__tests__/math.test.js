@@ -6,5 +6,5 @@ test('10/2 equqals 5', ()=>{
     expect(division(10, 2)).toBe(5)
 })
 test('15/5 equqals 3', ()=>{
-    expect(division(15, 3)).toBe(3)
+    expect(division(15, 5)).toBe(3)
 })
