@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    if: github.event_name == "push"
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -34,7 +34,7 @@ jobs:
         run: npm install
 
   docker-image-build-and-push:
-    if: github.event_name == "push"
+    if: github.event_name == 'push'
     needs: test
     runs-on: ubuntu-latest
 
@@ -56,7 +56,7 @@ jobs:
           docker push ${{secrets.DOCKER_USERNAME}}/tmfront
   
   deploy-to-aws-vm:
-    if: github.event_name == "workflow_dispatch"
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
