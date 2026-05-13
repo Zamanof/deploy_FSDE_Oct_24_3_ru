@@ -46,3 +46,36 @@ jobs:
         run: |
           docker build -t ${{secrets.DOCKER_USERNAME}}/tmapi ./api
           docker push ${{secrets.DOCKER_USERNAME}}/tmapi
+      
+      - name: Frontend image build and push to docker hub
+        run: |
+          docker build -t ${{secrets.DOCKER_USERNAME}}/tmfront ./frontend
+          docker push ${{secrets.DOCKER_USERNAME}}/tmfront
+  
+  deploy-to-aws-vm:
+    needs: docker-image-build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: AWS VM deploy
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{secrets.AWS_VM_HOST}}
+          username: ${{secrets.AWS_VM_USERNAME}}
+          key:  ${{secrets.AWS_VM_SSH_KEY}}
+          port: 22
+
+          script: |
+            if [ ! -d "deploy_FSDE_Oct_24_3_ru/.git" ]; then
+            git clone https://github.com/Zamanof/deploy_FSDE_Oct_24_3_ru.git
+            fi
+
+            cd deploy_FSDE_Oct_24_3_ru
+            git pull origin main
+            docker compose pull
+            docker compose down
+            docker compose up -d
+            docker image prune -f
+
+
+
