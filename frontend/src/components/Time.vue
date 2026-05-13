@@ -30,7 +30,7 @@ export default {
   <div class="greetings">
     <h1 class="green">{{ currentTime }}</h1>
     <h3>Нажмите на кнопку чтобы добавить в базу данных</h3>
-    <button @click="saveTime">Добавить времья</button>
+    <button @click="saveTime">Добавить qwerty</button>
     <h3 v-if="savedTimes.length && showSavedTimes">
       Ранее добавленное время::
     </h3>
@@ -62,7 +62,7 @@ h3 {
 button {
   font-size: 1.5rem;
   margin: 30px;
-  background-color: rgb(14, 172, 211);
+  background-color: rgb(211, 14, 185);
   border-radius: 5px;
   border: none;
   padding: 10px;
